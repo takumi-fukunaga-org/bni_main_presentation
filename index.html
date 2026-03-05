@@ -30,7 +30,7 @@
         body {
             background-color: #000;
             font-family: var(--font-sans);
-            overflow: hidden; /* スクロールバーを隠す */
+            overflow: hidden;
         }
 
         /* 横スクロールラッパー */
@@ -41,11 +41,11 @@
             scroll-behavior: smooth;
             width: 100vw;
             height: 100vh;
-            -ms-overflow-style: none;  /* IE, Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .presentation-wrapper::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
 
         /* 各スライドの基本スタイル */
@@ -82,7 +82,7 @@
             text-transform: uppercase;
         }
 
-        /* --- Slide 1: Title Slide (High Design Version) --- */
+        /* --- Slide 1: Title Slide --- */
         #slide1 { padding: 0; }
         .hero-split { display: flex; height: 100%; width: 100%; }
         .hero-text-side { 
@@ -180,8 +180,9 @@
 
         /* --- Slide 2: Self Introduction --- */
         .profile-grid { align-items: start; display: grid; gap: 60px; grid-template-columns: 350px 1fr; }
-        .profile-img-wrap { border: 4px solid var(--white); border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); height: 450px; overflow: hidden; width: 350px; }
-        .profile-img-wrap img { height: 100%; object-fit: cover; width: 100%; }
+        .profile-img-wrap { border: 4px solid var(--white); border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); height: 450px; width: 350px; overflow: hidden; }
+        .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        
         .profile-details .kana { color: var(--text-light); display: block; font-size: 18px; margin-bottom: 10px; }
         .profile-details h3 { font-size: 38px; margin-bottom: 20px; }
         .info-list { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; list-style: none; margin-bottom: 30px; }
@@ -194,12 +195,21 @@
 
         /* --- Slide 3: Career Timeline --- */
         .timeline-container { height: 100%; padding: 40px 0; position: relative; }
-        .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 180px; width: 100%; z-index: 0; }
+        .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 245px; width: 100%; z-index: 0; }
         .timeline-line::after { border-right: 4px solid var(--border); border-top: 4px solid var(--border); content: ''; height: 20px; position: absolute; right: 0; top: -8px; transform: rotate(45deg); width: 20px; }
         .timeline-items { display: flex; height: 100%; justify-content: space-between; position: relative; z-index: 1; }
         .timeline-item { align-items: center; display: flex; flex-direction: column; text-align: center; width: 24%; }
-        .timeline-img { border: 2px solid var(--white); border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); height: 120px; margin-bottom: 25px; overflow: hidden; width: 100%; }
-        .timeline-img img { height: 100%; object-fit: cover; width: 100%; }
+        .timeline-img { 
+            border: 2px solid var(--white); 
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+            width: 100%; 
+            max-width: 180px; /* 正方形の最大サイズ */
+            aspect-ratio: 1 / 1; /* 正方形に固定 */
+            margin-bottom: 25px; 
+            overflow: hidden; 
+        }
+        .timeline-img img { width: 100%; height: 100%; object-fit: cover; }
         .timeline-dot { background: var(--white); border: 4px solid var(--accent); border-radius: 50%; height: 24px; margin-bottom: 20px; width: 24px; }
         .timeline-item.active .timeline-dot { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
         .timeline-date { color: var(--accent); font-size: 14px; font-weight: 900; margin-bottom: 8px; }
@@ -208,16 +218,17 @@
 
         /* --- Slide 4: Portfolio --- */
         .portfolio-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); width: 100%; }
-        .portfolio-item { border-radius: 12px; height: clamp(150px, 30vh, 230px); overflow: hidden; position: relative; }
-        .portfolio-item img { height: 100%; object-fit: cover; width: 100%; }
-        .portfolio-overlay { background: linear-gradient(transparent, rgba(0,0,0,0.8)); bottom: 0; color: var(--white); left: 0; padding: 15px; position: absolute; right: 0; }
+        .portfolio-item { border-radius: 12px; height: clamp(150px, 30vh, 230px); position: relative; overflow: hidden; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
+        .portfolio-overlay { background: linear-gradient(transparent, rgba(0,0,0,0.8)); bottom: 0; color: var(--white); left: 0; padding: 15px; position: absolute; right: 0; z-index: 2;}
         .portfolio-overlay span { display: block; font-size: 14px; font-weight: 700; }
         .portfolio-overlay small { font-size: 11px; opacity: 0.8; }
 
         /* --- Slide 5: Origin --- */
         .bleed-image-layout { display: grid; gap: 50px; grid-template-columns: 1fr 1fr; padding: 0; align-items: stretch; }
         .bleed-content { display: flex; flex-direction: column; justify-content: center; padding: 60px; }
-        .bleed-img { height: 100%; object-fit: cover; width: 100%; }
+        .bleed-img-side { height: 100%; overflow: hidden; }
+        .bleed-img-side img { width: 100%; height: 100%; object-fit: cover; }
         .origin-list { list-style: none; margin-top: 30px; }
         .origin-list li { border-left: 4px solid var(--accent); margin-bottom: 24px; padding-left: 20px; }
         .origin-list h4 { color: var(--accent); font-size: 20px; margin-bottom: 5px; }
@@ -244,7 +255,6 @@
         .magic-phrase { background: var(--accent-soft); border: 2px dashed var(--accent); border-radius: 15px; color: var(--accent); padding: 30px; text-align: center; }
         .magic-phrase h4 { font-size: 24px; margin-bottom: 10px; }
 
-        /* Content Area helper */
         .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
     </style>
 </head>
@@ -260,7 +270,7 @@
                 <p class="subtitle">宿泊事業の企画・設計・工事から運営・集客まで。<br>想いを「持続可能な収益」に変える専門集団。</p>
             </div>
             <div class="hero-image-side">
-                <img src="images/top.jpg" alt="SUGOMoRI Resort Main Image" onerror="this.src='http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615'">
+                <img src="images/top.jpg" alt="SUGOMoRI Resort Main Visual">
             </div>
         </div>
     </div>
@@ -272,7 +282,7 @@
         <div class="content-area">
             <div class="profile-grid">
                 <div class="profile-img-wrap">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/16530807984824472230" alt="福永 拓光 プロフィール写真">
+                    <img src="images/profile.jpg" alt="福永 拓光">
                 </div>
                 <div class="profile-details">
                     <span class="kana">ふくなが たくみ</span>
@@ -307,28 +317,29 @@
                 <div class="timeline-line"></div>
                 <div class="timeline-items">
                     <div class="timeline-item">
-                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/5141988673484281359" alt="兵庫県立福崎高校"></div>
+                        <div class="timeline-img"><img src="images/job1.jpg" alt="兵庫県立福崎高校"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2011.4 - 2014.3</div>
                         <p class="timeline-label">兵庫県立福崎高校</p>
-                        <p class="timeline-desc">勉強そっちのけで毎日バドミントンに明け暮れる毎日</p>
+                        <p class="timeline-desc">勉強そっちのけで毎日バドミントンに<br>明け暮れる日々。</p>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/14395400642293693913" alt="辻製菓専門学校"></div>
+                        <div class="timeline-img"><img src="images/job2.jpg" alt="辻製菓専門学校"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2014.4 - 2016.3</div>
                         <p class="timeline-label">辻製菓専門学校</p>
-                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。ひたすらお菓子を作り続けた</p>
+                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。<br>
+                                   ひたすらお菓子を作り続けた</p>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/662382235233732272" alt="学校法人 辻料理学館"></div>
+                        <div class="timeline-img"><img src="images/job3.jpg" alt="学校法人 辻料理学館"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2016.4 - 2022.3</div>
                         <p class="timeline-label">学校法人 辻料理学館</p>
                         <p class="timeline-desc">卒業後、専門学校の教員として就職。授業と研究をしながらお菓子作りのスキルアップ</p>
                     </div>
                     <div class="timeline-item active">
-                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/3750769878893075385" alt="ハウスインフォ"></div>
+                        <div class="timeline-img"><img src="images/job4.jpg" alt="株式会社ハウスインフォ"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2022.4 - 現在</div>
                         <p class="timeline-label">株式会社ハウスインフォ</p>
@@ -345,12 +356,12 @@
         <h2 class="slide-title">全国に広がるプロジェクト</h2>
         <div class="content-area">
             <div class="portfolio-grid">
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="1"><div class="portfolio-overlay"><span>SUGOMoRIリゾート生野高原</span><small>兵庫県朝来市</small></div></div>
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10530272778914269098" alt="2"><div class="portfolio-overlay"><span>KONA RESORT AWAJI KAI</span><small>兵庫県淡路市</small></div></div>
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/17816629117501921112" alt="3"><div class="portfolio-overlay"><span>UTAKATA HOTEL HIMEJI</span><small>兵庫県姫路市</small></div></div>
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10263064524813022216" alt="4"><div class="portfolio-overlay"><span>余泊 / Yohaku</span><small>長崎県</small></div></div>
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="5"><div class="portfolio-overlay"><span>Besso姫路</span><small>兵庫県姫路市</small></div></div>
-                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10530272778914269098" alt="6"><div class="portfolio-overlay"><span>侘寂</span><small>兵庫県</small></div></div>
+                <div class="portfolio-item"><img src="images/sugomori.jpg" alt="SUGOMoRIリゾート生野高原"><div class="portfolio-overlay"><span>SUGOMoRIリゾート生野高原</span><small>兵庫県朝来市</small></div></div>
+                <div class="portfolio-item"><img src="images/kona.jpg" alt="KONA RESORT AWAJI KAI"><div class="portfolio-overlay"><span>KONA RESORT AWAJI KAI</span><small>兵庫県淡路市</small></div></div>
+                <div class="portfolio-item"><img src="images/utakata.jpg" alt="UTAKATA HOTEL HIMEJI"><div class="portfolio-overlay"><span>UTAKATA HOTEL HIMEJI</span><small>兵庫県姫路市</small></div></div>
+                <div class="portfolio-item"><img src="images/yohaku.jpg" alt="余泊 / Yohaku"><div class="portfolio-overlay"><span>余泊 / Yohaku</span><small>長崎県</small></div></div>
+                <div class="portfolio-item"><img src="images/besso.jpg" alt="Besso姫路"><div class="portfolio-overlay"><span>Besso姫路</span><small>兵庫県姫路市</small></div></div>
+                <div class="portfolio-item"><img src="images/wabisabi.jpg" alt="侘寂"><div class="portfolio-overlay"><span>侘寂</span><small>兵庫県姫路市</small></div></div>
             </div>
         </div>
     </div>
@@ -366,7 +377,9 @@
                 <li><h4>現場で磨いたノウハウ</h4><p>理論ではない、運営現場で得た「本物の知恵」を提供。</p></li>
             </ul>
         </div>
-        <img class="bleed-img" src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="リゾート外観">
+        <div class="bleed-img-side">
+            <img src="images/origin.jpg" alt="運営現場の強み">
+        </div>
     </div>
 
     <!-- Slide 6: Insight -->
@@ -377,11 +390,13 @@
             <div class="insight-grid">
                 <div class="insight-card">
                     <div class="card-head"><i class="fa-solid fa-circle-check" style="color: var(--accent);"></i><h3>建物は作れる</h3></div>
-                    <p>建築会社は「器」を作るプロ。世の中には素敵なデザインの建物が溢れています。</p>
+                    <p>建築会社は「器」を作るプロ。<br>
+世の中には素敵なデザインの建物が溢れています。</p>
                 </div>
                 <div class="insight-card warning">
                     <div class="card-head"><i class="fa-solid fa-triangle-exclamation" style="color: #DC2626;"></i><h3>経営が続かない</h3></div>
-                    <p>宿泊業には独自の「運営オペレーション」「集客戦略」が必要。多くのオーナーがここで挫折します。</p>
+                    <p>宿泊業には独自の「運営オペレーション」「集客戦略」が必要。<br>
+                       多くのオーナーがここで挫折します。</p>
                 </div>
             </div>
         </div>
@@ -420,7 +435,7 @@
                 </div>
                 <div class="magic-phrase">
                     <p style="font-size: 14px; margin-bottom: 10px;">紹介の魔法のフレーズ</p>
-                    <h4>「宿泊事業を<br>やりたい人がいる」</h4>
+                    <h4>「宿泊事業をやりたい人がいる」</h4>
                     <p style="margin-top: 20px; font-weight: 500;">これだけで、あとは私たちが<br>責任を持ってカタチにします。</p>
                 </div>
             </div>
@@ -428,22 +443,18 @@
     </div>
 </div>
 
-<!-- Navigation UI Components -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="nav-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
-<div class="slide-indicator" id="indicator">
-    <!-- Generated by JS -->
-</div>
+<div class="slide-indicator" id="indicator"></div>
 
 <script>
     const wrapper = document.getElementById('presentation-wrapper');
     const indicator = document.getElementById('indicator');
     const slides = document.querySelectorAll('.slide-container');
     
-    // インジケーターの生成
     slides.forEach((_, i) => {
         const dot = document.createElement('div');
         dot.className = i === 0 ? 'dot active' : 'dot';
@@ -453,7 +464,6 @@
         indicator.appendChild(dot);
     });
 
-    // 現在のスライド位置を特定してインジケーターを更新
     wrapper.addEventListener('scroll', () => {
         const index = Math.round(wrapper.scrollLeft / window.innerWidth);
         const dots = document.querySelectorAll('.dot');
@@ -462,14 +472,12 @@
         });
     });
 
-    // ナビゲーションボタン用の関数
     function moveSlide(direction) {
         const currentIndex = Math.round(wrapper.scrollLeft / window.innerWidth);
         const nextIndex = Math.max(0, Math.min(slides.length - 1, currentIndex + direction));
         wrapper.scrollTo({ left: window.innerWidth * nextIndex, behavior: 'smooth' });
     }
 
-    // キーボード操作への対応
     window.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === ' ') moveSlide(1);
         if (e.key === 'ArrowLeft') moveSlide(-1);
