@@ -66,7 +66,7 @@
         /* Typography */
         h1 { font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 1.1; color: var(--text-main); }
         h2.slide-title { border-left: 8px solid var(--accent); font-size: 42px; font-weight: 900; margin-bottom: 40px; padding-left: 24px; text-align: left; width: 100%; }
-        h3 { font-size: 28px; font-weight: 700; color: var(--text-main); }
+        h3 { font-size: 24px; font-weight: 700; color: var(--text-main); }
         p, li { color: var(--text-sub); font-size: 18px; line-height: 1.6; }
         .highlight { color: var(--accent); }
 
@@ -123,7 +123,7 @@
         .hero-text-side .subtitle {
             font-size: 20px;
             color: var(--text-sub);
-            max-width: 650px; /* 1行に収まるよう幅を拡張 */
+            max-width: 650px;
             border-left: 2px solid var(--accent);
             padding-left: 20px;
         }
@@ -178,7 +178,7 @@
             border-radius: 10px;
         }
 
-        /* --- Slide 2: Self Introduction --- */
+        /* --- Slide: Self Introduction --- */
         .profile-grid { align-items: start; display: grid; gap: 60px; grid-template-columns: 350px 1fr; }
         .profile-img-wrap { border: 4px solid var(--white); border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); height: 450px; width: 350px; overflow: hidden; }
         .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -193,7 +193,7 @@
         .hobby-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
         .hobby-tag { background: var(--accent-soft); border-radius: 50px; color: var(--accent); font-size: 15px; font-weight: 700; padding: 6px 16px; }
 
-        /* --- Slide 3: Career Timeline --- */
+        /* --- Slide: Career Timeline --- */
         .timeline-container { height: 100%; padding: 40px 0; position: relative; }
         .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 245px; width: 100%; z-index: 0; }
         .timeline-line::after { border-right: 4px solid var(--border); border-top: 4px solid var(--border); content: ''; height: 20px; position: absolute; right: 0; top: -8px; transform: rotate(45deg); width: 20px; }
@@ -204,8 +204,8 @@
             border-radius: 12px; 
             box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
             width: 100%; 
-            max-width: 180px; /* 正方形の最大サイズ */
-            aspect-ratio: 1 / 1; /* 正方形に固定 */
+            max-width: 180px;
+            aspect-ratio: 1 / 1;
             margin-bottom: 25px; 
             overflow: hidden; 
         }
@@ -216,7 +216,17 @@
         .timeline-label { font-size: 16px; font-weight: 900; line-height: 1.4; color: var(--text-main); margin-bottom: 12px; }
         .timeline-desc { font-size: 14px; color: var(--text-sub); line-height: 1.5; padding: 0 10px; text-align: left; }
 
-        /* --- Slide 4: Portfolio --- */
+        /* --- Slide: SUGOMoRI Appeal (New) --- */
+        .appeal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; }
+        .appeal-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .appeal-img-box { width: 100%; height: 200px; background: #eee; position: relative; }
+        .appeal-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .appeal-content { padding: 30px; }
+        .appeal-icon { color: var(--accent); font-size: 32px; margin-bottom: 15px; }
+        .appeal-card h3 { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid var(--accent-soft); padding-bottom: 10px; }
+        .appeal-card p { font-size: 15px; line-height: 1.5; color: var(--text-sub); }
+
+        /* --- Slide: Portfolio --- */
         .portfolio-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); width: 100%; }
         .portfolio-item { border-radius: 12px; height: clamp(150px, 30vh, 230px); position: relative; overflow: hidden; }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
@@ -224,7 +234,7 @@
         .portfolio-overlay span { display: block; font-size: 14px; font-weight: 700; }
         .portfolio-overlay small { font-size: 11px; opacity: 0.8; }
 
-        /* --- Slide 5: Origin --- */
+        /* --- Slide: Origin --- */
         .bleed-image-layout { display: grid; gap: 50px; grid-template-columns: 1fr 1fr; padding: 0; align-items: stretch; }
         .bleed-content { display: flex; flex-direction: column; justify-content: center; padding: 60px; }
         .bleed-img-side { height: 100%; overflow: hidden; }
@@ -233,21 +243,21 @@
         .origin-list li { border-left: 4px solid var(--accent); margin-bottom: 24px; padding-left: 20px; }
         .origin-list h4 { color: var(--accent); font-size: 20px; margin-bottom: 5px; }
 
-        /* --- Slide 6: Insight --- */
+        /* --- Slide: Insight --- */
         .insight-grid { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; width: 100%; }
         .insight-card { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-top: 6px solid var(--accent); }
         .insight-card.warning { border-top-color: #DC2626; }
         .card-head { align-items: center; display: flex; gap: 15px; margin-bottom: 20px; }
         .card-head i { font-size: 32px; }
 
-        /* --- Slide 7: Service Flow --- */
+        /* --- Slide: Service Flow --- */
         .flow-container { display: flex; gap: 20px; justify-content: space-between; width: 100%; }
         .flow-item { align-items: center; background: var(--white); border-radius: 15px; display: flex; flex-direction: column; flex: 1; padding: 30px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .flow-num { background: var(--accent); border-radius: 50%; color: var(--white); font-size: 18px; font-weight: 900; height: 40px; margin-bottom: 15px; padding-top: 6px; width: 40px; }
         .flow-item h4 { font-size: 20px; margin-bottom: 10px; }
         .flow-item p { font-size: 14px; color: var(--text-light); }
 
-        /* --- Slide 8: Action --- */
+        /* --- Slide: Action --- */
         .cta-box { align-items: center; background: var(--accent); border-radius: 24px; color: var(--white); display: grid; gap: 50px; grid-template-columns: 1fr 1.2fr; margin-top: 20px; padding: 50px; }
         .cta-box h2 { color: var(--white); border: none; font-size: 36px; margin-bottom: 20px; padding: 0; }
         .referral-list { list-style: none; }
@@ -261,7 +271,7 @@
 <body>
 
 <div class="presentation-wrapper" id="presentation-wrapper">
-    <!-- Slide 1: Title Slide -->
+    <!-- Slide 1: Title -->
     <div class="slide-container" id="slide1">
         <div class="hero-split">
             <div class="hero-text-side">
@@ -291,7 +301,7 @@
                         <li class="info-item"><span class="label">生年月日</span><span class="value">1995年11月22日</span></li>
                         <li class="info-item"><span class="label">住まい</span><span class="value">兵庫県神崎郡福崎町1535-1</span></li>
                         <li class="info-item"><span class="label">実家</span><span class="value">兵庫県姫路市山田町多田1541</span></li>
-                        <li class="info-item"><span class="label">ペット</span><span class="value">モリアオガエル、メダカ</span></li>
+                        <li class="info-item"><span class="label">ペット</span><span class="value">モリアオガエル、メダカ多数</span></li>
                     </ul>
                     <div class="hobby-section">
                         <p style="font-weight: 700; color: var(--accent); font-size: 16px;">趣味 / 好きなこと</p>
@@ -321,36 +331,79 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2011.4 - 2014.3</div>
                         <p class="timeline-label">兵庫県立福崎高校</p>
-                        <p class="timeline-desc">勉強そっちのけで毎日バドミントンに明け暮れる日々</p>
+                        <p class="timeline-desc">勉強そっちのけで毎日バドミントンに明け暮れる毎日</p>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-img"><img src="images/job2.jpg" alt="辻製菓専門学校"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2014.4 - 2016.3</div>
                         <p class="timeline-label">辻製菓専門学校</p>
-                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学<br>ひたすらお菓子を作り続けた</p>
+                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。<br>ひたすらお菓子を作り続けた</p>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-img"><img src="images/job3.jpg" alt="学校法人 辻料理学館"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2016.4 - 2022.3</div>
                         <p class="timeline-label">学校法人 辻料理学館</p>
-                        <p class="timeline-desc">卒業後、専門学校の教員として就職<br>授業と研究をしながらお菓子作りのスキルアップ</p>
+                        <p class="timeline-desc">卒業後、専門学校の教員として就職。<br>授業と研究をしながらお菓子作りのスキルアップ</p>
                     </div>
                     <div class="timeline-item active">
                         <div class="timeline-img"><img src="images/job4.jpg" alt="株式会社ハウスインフォ"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2022.4 - 現在</div>
                         <p class="timeline-label">株式会社ハウスインフォ</p>
-                        <p class="timeline-desc">レストランのシェフ退職を機に、後任として就職<br>スゴモリに入り浸る生活がスタート</p>
+                        <p class="timeline-desc">レストランのシェフ退職を機に、後任として就職。<br>スゴモリに入り浸る日々がスタート</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: Portfolio (Fixed filenames based on screenshot) -->
+    <!-- Slide 4: SUGOMoRI Appeal (New Slide) -->
     <div class="slide-container" id="slide4">
+        <span class="section-label">Resort Concept</span>
+        <h2 class="slide-title">SUGOMoRIリゾート生野高原の魅力</h2>
+        <div class="content-area">
+            <div class="appeal-grid">
+                <!-- Point 1 -->
+                <div class="appeal-card">
+                    <div class="appeal-img-box">
+                        <img src="images/sugomori1.jpg" alt="絶景">
+                    </div>
+                    <div class="appeal-content">
+                        <div class="appeal-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                        <h3>標高650mの絶景</h3>
+                        <p>都会の喧騒を忘れさせる高原の澄んだ空気。夜には降り注ぐような星空、朝には幻想的な雲海が広がる最高のロケーションです。</p>
+                    </div>
+                </div>
+                <!-- Point 2 -->
+                <div class="appeal-card">
+                    <div class="appeal-img-box">
+                        <img src="images/sugomori2.jpg" alt="建築">
+                    </div>
+                    <div class="appeal-content">
+                        <div class="appeal-icon"><i class="fa-solid fa-building-columns"></i></div>
+                        <h3>唯一無二のデザイン</h3>
+                        <p>ドームテントからラグジュアリーな貸別荘まで。21棟すべてが異なるコンセプトを持ち、何度訪れても新しい発見がある建築美が自慢です。</p>
+                    </div>
+                </div>
+                <!-- Point 3 -->
+                <div class="appeal-card">
+                    <div class="appeal-img-box">
+                        <img src="images/sugomori3.jpg" alt="体験">
+                    </div>
+                    <div class="appeal-content">
+                        <div class="appeal-icon"><i class="fa-solid fa-fire"></i></div>
+                        <h3>五感を研ぎ澄ます体験</h3>
+                        <p>本格サウナでの「ととのい」、焚き火を囲む贅沢な時間。地元の食材を活かした食の体験を通じて、心身ともにリフレッシュできる空間を提供します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Portfolio -->
+    <div class="slide-container" id="slide5">
         <span class="section-label">Portfolio</span>
         <h2 class="slide-title">全国に広がるプロジェクト</h2>
         <div class="content-area">
@@ -365,8 +418,8 @@
         </div>
     </div>
 
-    <!-- Slide 5: Origin -->
-    <div class="slide-container bleed-image-layout" id="slide5">
+    <!-- Slide 6: Origin -->
+    <div class="slide-container bleed-image-layout" id="slide6">
         <div class="bleed-content">
             <span class="section-label">Strength</span>
             <h2 style="border: none; padding: 0; font-size: 48px;">自らが運営者という強み</h2>
@@ -381,8 +434,8 @@
         </div>
     </div>
 
-    <!-- Slide 6: Insight -->
-    <div class="slide-container" id="slide6">
+    <!-- Slide 7: Insight -->
+    <div class="slide-container" id="slide7">
         <span class="section-label">Insight</span>
         <h2 class="slide-title">宿泊施設は「回す」ことが難しい</h2>
         <div class="content-area">
@@ -399,10 +452,10 @@
         </div>
     </div>
 
-    <!-- Slide 7: Service Flow -->
-    <div class="slide-container" id="slide7">
+    <!-- Slide 8: Service Flow -->
+    <div class="slide-container" id="slide8">
         <span class="section-label">Service</span>
-        <h2 class="slide-title">最初から、最後まで。一気通貫。</h2>
+        <h2 class="slide-title">最初から、最後に。一気通貫。</h2>
         <div class="content-area">
             <div class="flow-container">
                 <div class="flow-item"><div class="flow-num">01</div><h4>企画</h4><p>コンセプト・収支予測</p></div>
@@ -415,8 +468,8 @@
         </div>
     </div>
 
-    <!-- Slide 8: Action -->
-    <div class="slide-container" id="slide8">
+    <!-- Slide 9: Action -->
+    <div class="slide-container" id="slide9">
         <span class="section-label">Ask for Referral</span>
         <h2 class="slide-title">ご紹介いただきたい方</h2>
         <div class="content-area">
@@ -424,16 +477,16 @@
                 <div>
                     <h2>Target</h2>
                     <ul class="referral-list">
-                        <li>・遊休地の活用に悩む不動産オーナー</li>
-                        <li>・空き建物・古民家をお持ちのオーナー</li>
-                        <li>・新規事業で宿泊業を検討中の企業</li>
-                        <li>・観光活性化を目指す地方自治体</li>
+                        <li>遊休地の活用に悩む不動産オーナー</li>
+                        <li>空き建物・古民家をお持ちのオーナー</li>
+                        <li>新規事業で宿泊業を検討中の企業</li>
+                        <li>観光活性化を目指す地方自治体</li>
                     </ul>
                 </div>
                 <div class="magic-phrase">
                     <p style="font-size: 14px; margin-bottom: 10px;">紹介の魔法のフレーズ</p>
-                    <h4>「宿泊事業をやりたい人がいる」</h4>
-                    <p style="margin-top: 20px; font-weight: 500;">これだけで、あとは私たちが責任を持ってカタチにします。</p>
+                    <h4>「宿泊事業を<br>やりたい人がいる」</h4>
+                    <p style="margin-top: 20px; font-weight: 500;">これだけで、あとは私たちが<br>責任を持ってカタチにします。</p>
                 </div>
             </div>
         </div>
@@ -452,6 +505,7 @@
     const indicator = document.getElementById('indicator');
     const slides = document.querySelectorAll('.slide-container');
     
+    // インジケーターの生成
     slides.forEach((_, i) => {
         const dot = document.createElement('div');
         dot.className = i === 0 ? 'dot active' : 'dot';
@@ -461,6 +515,7 @@
         indicator.appendChild(dot);
     });
 
+    // スクロールイベントでインジケーターを更新
     wrapper.addEventListener('scroll', () => {
         const index = Math.round(wrapper.scrollLeft / window.innerWidth);
         const dots = document.querySelectorAll('.dot');
@@ -469,12 +524,14 @@
         });
     });
 
+    // ナビゲーションボタン
     function moveSlide(direction) {
         const currentIndex = Math.round(wrapper.scrollLeft / window.innerWidth);
         const nextIndex = Math.max(0, Math.min(slides.length - 1, currentIndex + direction));
         wrapper.scrollTo({ left: window.innerWidth * nextIndex, behavior: 'smooth' });
     }
 
+    // キーボード操作
     window.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === ' ') moveSlide(1);
         if (e.key === 'ArrowLeft') moveSlide(-1);
