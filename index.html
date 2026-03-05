@@ -1,646 +1,479 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SUGOMoRIリゾート｜プレゼンテーション</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUGOMoRIリゾート プレゼンテーション</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ============================================================
+           Core Design System
+        ============================================================ */
+        :root {
+            --accent: #0F766E;      /* 高級感のあるティール */
+            --accent-soft: #F0F9F9;
+            --accent-gold: #B45309; 
+            --text-main: #1F2937;
+            --text-sub: #4B5563;
+            --text-light: #9CA3AF;
+            --bg-creme: #FCFAF7;    /* 温かみのあるベースカラー */
+            --white: #FFFFFF;
+            --border: #E5E7EB;
+            --font-sans: 'Noto Sans JP', sans-serif;
+        }
 
-  <!-- Google Fonts: Noto Sans JP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- Reveal.js CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+        body {
+            background-color: #000;
+            font-family: var(--font-sans);
+            overflow: hidden; /* スクロールバーを隠す */
+        }
 
-  <style>
-/* ============================================================
-   Base & Variables
-============================================================ */
-:root {
-  --accent: #0F766E;      /* 深いティール（誠実・高級） */
-  --accent-soft: #F0F9F9;
-  --accent-gold: #B45309; /* アクセント用の落ち着いたゴールド */
-  --text-main: #1F2937;
-  --text-sub: #4B5563;
-  --text-light: #9CA3AF;
-  --bg-creme: #FCFAF7;    /* 少し温かみのある背景 */
-  --white: #FFFFFF;
-  --border: #E5E7EB;
-  --font-sans: 'Noto Sans JP', sans-serif;
-}
+        /* 横スクロールラッパー */
+        .presentation-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            width: 100vw;
+            height: 100vh;
+            -ms-overflow-style: none;  /* IE, Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .presentation-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
 
-/* ============================================================
-   Reveal.js Overrides
-============================================================ */
-.reveal {
-  font-family: var(--font-sans);
-  background-color: var(--bg-creme);
-  color: var(--text-main);
-}
+        /* 各スライドの基本スタイル */
+        .slide-container {
+            background-color: var(--bg-creme);
+            flex: 0 0 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* スライド全体を上寄せにするための調整 */
-.reveal .slides {
-  text-align: left;
-}
+        .slide-container > * { position: relative; z-index: 1; }
 
-.reveal .slides section {
-  padding-top: 60px !important; /* コンテンツを上部に寄せる */
-  box-sizing: border-box;
-}
+        /* Typography */
+        h1 { font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 1.1; color: var(--text-main); }
+        h2.slide-title { border-left: 8px solid var(--accent); font-size: 42px; font-weight: 900; margin-bottom: 40px; padding-left: 24px; text-align: left; width: 100%; }
+        h3 { font-size: 28px; font-weight: 700; color: var(--text-main); }
+        p, li { color: var(--text-sub); font-size: 18px; line-height: 1.6; }
+        .highlight { color: var(--accent); }
 
-.reveal h1, .reveal h2, .reveal h3 {
-  font-family: var(--font-sans);
-  text-transform: none;
-  letter-spacing: -0.01em;
-  font-weight: 700;
-  line-height: 1.2;
-}
+        .section-label {
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            text-transform: uppercase;
+        }
 
-/* ============================================================
-   Layout Utilities
-============================================================ */
-.container {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
+        /* --- Slide 1: Title Slide (High Design Version) --- */
+        #slide1 { padding: 0; }
+        .hero-split { display: flex; height: 100%; width: 100%; }
+        .hero-text-side { 
+            width: 45%; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 80px 60px; 
+            background: var(--bg-creme);
+            z-index: 2;
+        }
+        .hero-image-side { 
+            width: 55%; 
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-image-side::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(to right, var(--bg-creme), transparent);
+        }
+        .hero-text-side h1 {
+            margin-bottom: 30px;
+            white-space: nowrap;
+            position: relative;
+            z-index: 3;
+            margin-right: -100px;
+        }
+        .hero-text-side .subtitle {
+            font-size: 20px;
+            color: var(--text-sub);
+            max-width: 480px;
+            border-left: 2px solid var(--accent);
+            padding-left: 20px;
+        }
 
-.flex { display: flex; }
-.grid { display: grid; }
-.gap-md { gap: 2rem; }
-.items-center { align-items: center; }
+        /* --- Navigation UI --- */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .slide-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+        }
+        .dot.active {
+            background: var(--accent);
+            width: 25px;
+            border-radius: 10px;
+        }
 
-.section-label {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  margin-bottom: 1rem; /* 余白を少し詰める */
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px;
-}
+        /* --- Slide 2: Self Introduction --- */
+        .profile-grid { align-items: start; display: grid; gap: 60px; grid-template-columns: 350px 1fr; }
+        .profile-img-wrap { border: 4px solid var(--white); border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); height: 450px; overflow: hidden; width: 350px; }
+        .profile-img-wrap img { height: 100%; object-fit: cover; width: 100%; }
+        .profile-details .kana { color: var(--text-light); display: block; font-size: 18px; margin-bottom: 10px; }
+        .profile-details h3 { font-size: 38px; margin-bottom: 20px; }
+        .info-list { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; list-style: none; margin-bottom: 30px; }
+        .info-item { display: flex; flex-direction: column; gap: 4px; }
+        .info-item .label { color: var(--accent); font-size: 14px; font-weight: 700; }
+        .info-item .value { font-size: 16px; font-weight: 500; }
+        .hobby-section { background: var(--white); border-radius: 15px; padding: 20px 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .hobby-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .hobby-tag { background: var(--accent-soft); border-radius: 50px; color: var(--accent); font-size: 15px; font-weight: 700; padding: 6px 16px; }
 
-.highlight { color: var(--accent); }
+        /* --- Slide 3: Career Timeline --- */
+        .timeline-container { height: 100%; padding: 40px 0; position: relative; }
+        .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 180px; width: 100%; z-index: 0; }
+        .timeline-line::after { border-right: 4px solid var(--border); border-top: 4px solid var(--border); content: ''; height: 20px; position: absolute; right: 0; top: -8px; transform: rotate(45deg); width: 20px; }
+        .timeline-items { display: flex; height: 100%; justify-content: space-between; position: relative; z-index: 1; }
+        .timeline-item { align-items: center; display: flex; flex-direction: column; text-align: center; width: 24%; }
+        .timeline-img { border: 2px solid var(--white); border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); height: 120px; margin-bottom: 25px; overflow: hidden; width: 100%; }
+        .timeline-img img { height: 100%; object-fit: cover; width: 100%; }
+        .timeline-dot { background: var(--white); border: 4px solid var(--accent); border-radius: 50%; height: 24px; margin-bottom: 20px; width: 24px; }
+        .timeline-item.active .timeline-dot { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
+        .timeline-date { color: var(--accent); font-size: 14px; font-weight: 900; margin-bottom: 8px; }
+        .timeline-label { font-size: 16px; font-weight: 900; line-height: 1.4; color: var(--text-main); margin-bottom: 12px; }
+        .timeline-desc { font-size: 14px; color: var(--text-sub); line-height: 1.5; padding: 0 10px; text-align: left; }
 
-/* ============================================================
-   Slide 1: Hero
-============================================================ */
-.hero-content {
-  border-left: 8px solid var(--accent);
-  padding-left: 3rem;
-  position: relative;
-  margin-top: 40px; /* ヒーローのみ位置調整 */
-}
+        /* --- Slide 4: Portfolio --- */
+        .portfolio-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); width: 100%; }
+        .portfolio-item { border-radius: 12px; height: clamp(150px, 30vh, 230px); overflow: hidden; position: relative; }
+        .portfolio-item img { height: 100%; object-fit: cover; width: 100%; }
+        .portfolio-overlay { background: linear-gradient(transparent, rgba(0,0,0,0.8)); bottom: 0; color: var(--white); left: 0; padding: 15px; position: absolute; right: 0; }
+        .portfolio-overlay span { display: block; font-size: 14px; font-weight: 700; }
+        .portfolio-overlay small { font-size: 11px; opacity: 0.8; }
 
-.hero-content::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: -8px;
-  width: 120px;
-  height: 2px;
-  background: var(--accent);
-}
+        /* --- Slide 5: Origin --- */
+        .bleed-image-layout { display: grid; gap: 50px; grid-template-columns: 1fr 1fr; padding: 0; align-items: stretch; }
+        .bleed-content { display: flex; flex-direction: column; justify-content: center; padding: 60px; }
+        .bleed-img { height: 100%; object-fit: cover; width: 100%; }
+        .origin-list { list-style: none; margin-top: 30px; }
+        .origin-list li { border-left: 4px solid var(--accent); margin-bottom: 24px; padding-left: 20px; }
+        .origin-list h4 { color: var(--accent); font-size: 20px; margin-bottom: 5px; }
 
-.reveal .hero-title-top {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-light);
-  letter-spacing: 0.3em;
-  margin-bottom: 0.5rem;
-}
+        /* --- Slide 6: Insight --- */
+        .insight-grid { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; width: 100%; }
+        .insight-card { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-top: 6px solid var(--accent); }
+        .insight-card.warning { border-top-color: #DC2626; }
+        .card-head { align-items: center; display: flex; gap: 15px; margin-bottom: 20px; }
+        .card-head i { font-size: 32px; }
 
-.reveal .hero-title-main {
-  font-size: 4.2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
+        /* --- Slide 7: Service Flow --- */
+        .flow-container { display: flex; gap: 20px; justify-content: space-between; width: 100%; }
+        .flow-item { align-items: center; background: var(--white); border-radius: 15px; display: flex; flex-direction: column; flex: 1; padding: 30px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .flow-num { background: var(--accent); border-radius: 50%; color: var(--white); font-size: 18px; font-weight: 900; height: 40px; margin-bottom: 15px; padding-top: 6px; width: 40px; }
+        .flow-item h4 { font-size: 20px; margin-bottom: 10px; }
+        .flow-item p { font-size: 14px; color: var(--text-light); }
 
-.reveal .hero-tagline {
-  font-size: 1.2rem;
-  color: var(--text-sub);
-  line-height: 1.6;
-}
+        /* --- Slide 8: Action --- */
+        .cta-box { align-items: center; background: var(--accent); border-radius: 24px; color: var(--white); display: grid; gap: 50px; grid-template-columns: 1fr 1.2fr; margin-top: 20px; padding: 50px; }
+        .cta-box h2 { color: var(--white); border: none; font-size: 36px; margin-bottom: 20px; padding: 0; }
+        .referral-list { list-style: none; }
+        .referral-list li { background: var(--white); color: var(--accent); border-radius: 8px; margin-bottom: 15px; padding: 14px 24px; font-size: 18px; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .magic-phrase { background: var(--accent-soft); border: 2px dashed var(--accent); border-radius: 15px; color: var(--accent); padding: 30px; text-align: center; }
+        .magic-phrase h4 { font-size: 24px; margin-bottom: 10px; }
 
-.presenter-info {
-  margin-top: 3.5rem;
-  display: flex;
-  align-items: baseline; /* テキストの底辺で揃える */
-  gap: 2.5rem;
-}
-
-.company-logo-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--text-main);
-}
-
-.presenter-name-wrap {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.2rem;
-}
-
-.presenter-name {
-  font-size: 2.2rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.presenter-role {
-  font-size: 0.95rem;
-  color: var(--text-light);
-  font-weight: 400;
-  white-space: nowrap;
-}
-
-/* ============================================================
-   Slide 2: Two Column (Origin)
-============================================================ */
-/* Originスライドはフルスクリーンのため、個別にpaddingを解除 */
-.reveal .slides section.slide-origin {
-  padding-top: 0 !important;
-}
-
-.origin-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  height: 100vh;
-}
-
-.image-pane {
-  position: relative;
-  overflow: hidden;
-  background: #E5E7EB;
-}
-
-.image-pane img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.content-pane {
-  padding: 8% 8%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.reveal .pane-title {
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.origin-list {
-  list-style: none;
-  padding: 0;
-}
-
-.origin-list li {
-  margin-bottom: 1.5rem;
-}
-
-.list-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 0.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.list-body {
-  font-size: 1rem;
-  color: var(--text-sub);
-}
-
-/* ============================================================
-   Slide 3: Insight (The Problem)
-============================================================ */
-.insight-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin-top: 1rem;
-}
-
-.insight-card {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-}
-
-.card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.card-icon.ok { background: var(--accent-soft); color: var(--accent); }
-.card-icon.ng { background: #FEF2F2; color: #DC2626; }
-
-.card-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-.card-desc {
-  font-size: 0.9rem;
-  color: var(--text-sub);
-  line-height: 1.6;
-}
-
-/* ============================================================
-   Slide 4: One Stop Flow
-============================================================ */
-.flow-timeline {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  margin-top: 2.5rem;
-}
-
-.flow-timeline::before {
-  content: '';
-  position: absolute;
-  top: 35px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--border);
-  z-index: 1;
-}
-
-.flow-step {
-  position: relative;
-  z-index: 2;
-  width: 18%;
-  text-align: center;
-}
-
-.step-number {
-  width: 70px;
-  height: 70px;
-  background: var(--white);
-  border: 2px solid var(--border);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.2rem;
-  font-weight: 900;
-  font-size: 1.3rem;
-  color: var(--text-light);
-  transition: all 0.3s ease;
-}
-
-.flow-step.active .step-number {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 20px rgba(15, 118, 110, 0.2);
-}
-
-.step-label {
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.step-info {
-  font-size: 0.75rem;
-  color: var(--text-sub);
-  line-height: 1.4;
-}
-
-/* ============================================================
-   Slide 5: Portfolio Grid
-============================================================ */
-.portfolio-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-}
-
-.portfolio-item {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  height: 220px; /* 250pxから220pxに縮小し、確実に収まるように */
-  background: #E5E7EB;
-}
-
-.portfolio-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.portfolio-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.2rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  color: var(--white);
-}
-
-.item-name { font-weight: 700; font-size: 0.95rem; }
-.item-loc { font-size: 0.7rem; opacity: 0.8; }
-
-/* ============================================================
-   Slide 6: Referral CTA
-============================================================ */
-.cta-box {
-  background: var(--accent);
-  color: var(--white);
-  padding: 3rem;
-  border-radius: 24px;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  gap: 2.5rem;
-  margin-top: 1rem;
-}
-
-.cta-left h2 {
-  color: var(--white) !important;
-  font-size: 2.6rem !important;
-  margin-bottom: 1rem;
-}
-
-.cta-phrase {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent-soft);
-  border: 2px dashed rgba(255,255,255,0.3);
-  padding: 1.2rem;
-  text-align: center;
-  border-radius: 12px;
-}
-
-.referral-list-clean {
-  list-style: none;
-  padding: 0;
-}
-
-.referral-list-clean li {
-  background: rgba(255,255,255,0.1);
-  margin-bottom: 0.6rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-  </style>
+        /* Content Area helper */
+        .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+    </style>
 </head>
 <body>
 
-<div class="reveal">
-  <div class="slides">
-
-    <!-- Slide 1: Hero -->
-    <section data-transition="fade-in slide-out">
-      <div class="container">
-        <div class="hero-content">
-          <p class="hero-title-top">BNI MAIN PRESENTATION</p>
-          <h1 class="hero-title-main">SUGOMoRI<br><span class="highlight">から一歩前へ。</span></h1>
-          <p class="hero-tagline">
-            宿泊事業の企画・設計・工事から運営・集客まで。<br>
-            私たちは、想いを「持続可能な収益」に変える専門集団です。
-          </p>
-          <div class="presenter-info">
-            <div class="company-logo-text">株式会社ハウスインフォ</div>
-            <div class="presenter-name-wrap">
-              <span class="presenter-name">福永 拓光</span>
-              <span class="presenter-role">宿泊事業コンサルティング</span>
+<div class="presentation-wrapper" id="presentation-wrapper">
+    <!-- Slide 1: Title Slide -->
+    <div class="slide-container" id="slide1">
+        <div class="hero-split">
+            <div class="hero-text-side">
+                <span class="section-label" style="margin-bottom: 40px;">Main Presentation</span>
+                <h1>SUGOMoRI<br><span class="highlight">から一歩前へ。</span></h1>
+                <p class="subtitle">宿泊事業の企画・設計・工事から運営・集客まで。<br>想いを「持続可能な収益」に変える専門集団。</p>
             </div>
-          </div>
+            <div class="hero-image-side">
+                <img src="images/top.jpg" alt="SUGOMoRI Resort Main Image" onerror="this.src='http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615'">
+            </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Slide 2: Origin (Magazine Style) -->
-    <section class="slide-origin" data-transition="slide" style="padding: 0;">
-      <div class="origin-layout">
-        <div class="image-pane">
-          <img src="images/sugomori.jpg" alt="SUGOMoRIリゾート生野高原">
+    <!-- Slide 2: Self Introduction -->
+    <div class="slide-container" id="slide2">
+        <span class="section-label">Profile</span>
+        <h2 class="slide-title">自己紹介</h2>
+        <div class="content-area">
+            <div class="profile-grid">
+                <div class="profile-img-wrap">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/16530807984824472230" alt="福永 拓光 プロフィール写真">
+                </div>
+                <div class="profile-details">
+                    <span class="kana">ふくなが たくみ</span>
+                    <h3>福永 拓光 <small style="font-size: 20px; color: var(--text-light); font-weight: 400;">(30歳)</small></h3>
+                    <ul class="info-list">
+                        <li class="info-item"><span class="label">生年月日</span><span class="value">1995年11月22日</span></li>
+                        <li class="info-item"><span class="label">住まい</span><span class="value">兵庫県神崎郡福崎町1535-1</span></li>
+                        <li class="info-item"><span class="label">実家</span><span class="value">兵庫県姫路市山田町多田1541</span></li>
+                        <li class="info-item"><span class="label">ペット</span><span class="value">モリアオガエル、メダカ多数</span></li>
+                    </ul>
+                    <div class="hobby-section">
+                        <p style="font-weight: 700; color: var(--accent); font-size: 16px;">趣味 / 好きなこと</p>
+                        <div class="hobby-tags">
+                            <span class="hobby-tag">ゴルフ</span><span class="hobby-tag">ポーカー</span><span class="hobby-tag">サウナ</span><span class="hobby-tag">ポケモン</span>
+                        </div>
+                        <p style="font-weight: 700; color: var(--accent); font-size: 16px; margin-top: 18px;">興味 / 関心</p>
+                        <div class="hobby-tags">
+                            <span class="hobby-tag">AIを使ったマーケティング</span><span class="hobby-tag">メルカリ物販</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="content-pane">
-          <span class="section-label">OUR ORIGIN</span>
-          <h2 class="pane-title">自らが運営者<br>という強み。</h2>
-          <ul class="origin-list">
-            <li>
-              <div class="list-title">SUGOMoRIリゾート生野高原</div>
-              <div class="list-body">兵庫県朝来市。2021年、私たちがゼロから手掛けた原点です。</div>
-            </li>
-            <li>
-              <div class="list-title">21棟の多様なスタイル</div>
-              <div class="list-body">ドームテントから貸別荘まで、高付加価値な体験をデザイン。</div>
-            </li>
-            <li>
-              <div class="list-title">現場で磨いたノウハウ</div>
-              <div class="list-body">理論だけではない、運営現場でしか得られない「本物の知恵」を提供します。</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Slide 3: Insight (Comparison) -->
-    <section>
-      <div class="container">
-        <span class="section-label">INSIGHT</span>
-        <h2 style="font-size: 2.8rem; margin-bottom: 1.5rem;">宿泊施設は、<br><span class="highlight">「建てる」ことより「回す」</span>ことが難しい。</h2>
-        
-        <div class="insight-grid">
-          <div class="insight-card" style="border-top: 4px solid #00e626;">
-            <div class="card-icon ok">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>
+    <!-- Slide 3: Career Timeline -->
+    <div class="slide-container" id="slide3">
+        <span class="section-label">Journey</span>
+        <h2 class="slide-title">経歴</h2>
+        <div class="content-area">
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-items">
+                    <div class="timeline-item">
+                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/5141988673484281359" alt="兵庫県立福崎高校"></div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2011.4 - 2014.3</div>
+                        <p class="timeline-label">兵庫県立福崎高校</p>
+                        <p class="timeline-desc">勉強そっちのけで毎日バドミントンに明け暮れる毎日</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/14395400642293693913" alt="辻製菓専門学校"></div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2014.4 - 2016.3</div>
+                        <p class="timeline-label">辻製菓専門学校</p>
+                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。ひたすらお菓子を作り続けた</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/662382235233732272" alt="学校法人 辻料理学館"></div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2016.4 - 2022.3</div>
+                        <p class="timeline-label">学校法人 辻料理学館</p>
+                        <p class="timeline-desc">卒業後、専門学校の教員として就職。授業と研究をしながらお菓子作りのスキルアップ</p>
+                    </div>
+                    <div class="timeline-item active">
+                        <div class="timeline-img"><img src="http://googleusercontent.com/image_collection/image_retrieval/3750769878893075385" alt="ハウスインフォ"></div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2022.4 - 現在</div>
+                        <p class="timeline-label">株式会社ハウスインフォ</p>
+                        <p class="timeline-desc">レストランのシェフ退職を機に、後任として就職。スゴモリに入り浸る日々がスタート</p>
+                    </div>
+                </div>
             </div>
-            <h3 class="card-title">建物は作れる</h3>
-            <p class="card-desc">
-              建築会社は「器」を作るプロです。<br>
-              世の中に素敵なデザインの建物は溢れています。
-            </p>
-          </div>
-          
-          <div class="insight-card" style="border-top: 4px solid #DC2626;">
-            <div class="card-icon ng">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
-            </div>
-            <h3 class="card-title">
-              しかし、<br>
-              経営が続かない</h3>
-            <p class="card-desc">
-              宿泊業には独自の「運営オペレーション」「スタッフ教育」<br>
-              「集客戦略」が必要。<br>
-              多くのオーナー様がここで挫折します。
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Slide 4: One-Stop (Flow) -->
-    <section>
-      <div class="container">
-        <span class="section-label">OUR SERVICE</span>
-        <h2 style="font-size: 2.8rem; margin-bottom: 0.5rem;">最初から、最後まで。<br><span class="highlight">一気通貫。</span></h2>
-        
-        <div class="flow-timeline">
-          <div class="flow-step active">
-            <div class="step-number">01</div>
-            <div class="step-label">企画</div>
-            <div class="step-info">収支予測・コンセプト</div>
-          </div>
-          <div class="flow-step active">
-            <div class="step-number">02</div>
-            <div class="step-label">設計</div>
-            <div class="step-info">ブランド・デザイン</div>
-          </div>
-          <div class="flow-step active">
-            <div class="step-number">03</div>
-            <div class="step-label">施工</div>
-            <div class="step-info">建築工事・品質管理</div>
-          </div>
-          <div class="flow-step active">
-            <div class="step-number">04</div>
-            <div class="step-label">運営</div>
-            <div class="step-info">現場管理・教育</div>
-          </div>
-          <div class="flow-step active">
-            <div class="step-number">05</div>
-            <div class="step-label">集客</div>
-            <div class="step-info">OTA・SNS戦略</div>
-          </div>
+    <!-- Slide 4: Portfolio -->
+    <div class="slide-container" id="slide4">
+        <span class="section-label">Portfolio</span>
+        <h2 class="slide-title">全国に広がるプロジェクト</h2>
+        <div class="content-area">
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="1"><div class="portfolio-overlay"><span>SUGOMoRIリゾート生野高原</span><small>兵庫県朝来市</small></div></div>
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10530272778914269098" alt="2"><div class="portfolio-overlay"><span>KONA RESORT AWAJI KAI</span><small>兵庫県淡路市</small></div></div>
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/17816629117501921112" alt="3"><div class="portfolio-overlay"><span>UTAKATA HOTEL HIMEJI</span><small>兵庫県姫路市</small></div></div>
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10263064524813022216" alt="4"><div class="portfolio-overlay"><span>余泊 / Yohaku</span><small>長崎県</small></div></div>
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="5"><div class="portfolio-overlay"><span>Besso姫路</span><small>兵庫県姫路市</small></div></div>
+                <div class="portfolio-item"><img src="http://googleusercontent.com/image_collection/image_retrieval/10530272778914269098" alt="6"><div class="portfolio-overlay"><span>侘寂</span><small>兵庫県</small></div></div>
+            </div>
         </div>
-        
-        <p style="margin-top: 2.5rem; font-size: 1rem; color: var(--text-sub); text-align: center;">
-          各工程の専門会社をバラバラに探す必要はありません。<br>
-          窓口を一括化することで、スピードと品質、そこで高い投資効率を担保します。
-        </p>
-      </div>
-    </section>
+    </div>
 
-    <!-- Slide 5: Portfolio Grid -->
-    <section>
-      <div class="container">
-        <span class="section-label">PORTFOLIO</span>
-        <h2 style="margin-bottom: 1.2rem;">全国に広がるプロジェクト。</h2>
-        
-        <div class="portfolio-container">
-          <!-- Item 1 -->
-          <div class="portfolio-item">
-            <img src="images/sugomori.jpg" alt="SUGOMoRIリゾート生野高原">
-            <div class="portfolio-overlay">
-              <div class="item-name">SUGOMoRIリゾート生野高原</div>
-              <div class="item-loc">兵庫県朝来市</div>
-            </div>
-          </div>
-          <!-- Item 2 -->
-          <div class="portfolio-item">
-            <img src="images/kona.jpg" alt="KONA RESORT AWAJI KAI">
-            <div class="portfolio-overlay">
-              <div class="item-name">KONA RESORT AWAJI KAI</div>
-              <div class="item-loc">兵庫県淡路島</div>
-            </div>
-          </div>
-          <!-- Item 3 -->
-          <div class="portfolio-item">
-            <img src="images/besso.jpg" alt="Besso姫路">
-            <div class="portfolio-overlay">
-              <div class="item-name">Besso姫路</div>
-              <div class="item-loc">兵庫県姫路市</div>
-            </div>
-          </div>
-          <!-- Item 4 -->
-          <div class="portfolio-item">
-            <img src="images/utakata.jpg" alt="UTAKATA HOTEL HIMEJI">
-            <div class="portfolio-overlay">
-              <div class="item-name">UTAKATA HOTEL HIMEJI</div>
-              <div class="item-loc">兵庫県姫路市</div>
-            </div>
-          </div>
-          <!-- Item 5 -->
-          <div class="portfolio-item">
-            <img src="images/wabisabi.jpg" alt="侘寂">
-            <div class="portfolio-overlay">
-              <div class="item-name">侘寂</div>
-              <div class="item-loc">兵庫県</div>
-            </div>
-          </div>
-          <!-- Item 6 -->
-          <div class="portfolio-item">
-            <img src="images/yohaku.jpg" alt="余泊">
-            <div class="portfolio-overlay">
-              <div class="item-name">余泊</div>
-              <div class="item-loc">長崎県</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 6: Referral (Action) -->
-    <section>
-      <div class="container">
-        <div class="cta-box">
-          <div class="cta-left">
-            <span class="section-label" style="color: var(--white); border-color: var(--white);">ASK FOR REFERRAL</span>
-            <h2>ご紹介いただきたい方</h2>
-            <ul class="referral-list-clean">
-              <li>空き建物・古民家をお持ちのオーナー</li>
-              <li>遊休地の活用に悩む不動産オーナー</li>
-              <li>新規事業で宿泊業を検討中の企業</li>
-              <li>観光活性化を目指す地方自治体</li>
+    <!-- Slide 5: Origin -->
+    <div class="slide-container bleed-image-layout" id="slide5">
+        <div class="bleed-content">
+            <span class="section-label">Strength</span>
+            <h2 style="border: none; padding: 0; font-size: 48px;">自らが運営者という強み</h2>
+            <ul class="origin-list">
+                <li><h4>SUGOMoRIリゾート生野高原</h4><p>2021年、ゼロから手掛けた私たちの原点。</p></li>
+                <li><h4>21棟の多様なスタイル</h4><p>ドームテントから貸別荘まで、高付加価値な体験をデザイン。</p></li>
+                <li><h4>現場で磨いたノウハウ</h4><p>理論ではない、運営現場で得た「本物の知恵」を提供。</p></li>
             </ul>
-          </div>
-          <div class="cta-right">
-            <p style="text-align: center; margin-bottom: 1rem; font-size: 0.9rem; opacity: 0.8;">紹介の魔法のフレーズ</p>
-            <div class="cta-phrase">
-              「宿泊事業を<br>やりたい人がいる」
-            </div>
-            <p style="margin-top: 1.5rem; text-align: center; font-size: 1.1rem; font-weight: 500;">
-              これだけで、あとは私たちが<br>
-              責任を持ってカタチにします。
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
+        <img class="bleed-img" src="http://googleusercontent.com/image_collection/image_retrieval/1099107419558966615" alt="リゾート外観">
+    </div>
 
-  </div>
+    <!-- Slide 6: Insight -->
+    <div class="slide-container" id="slide6">
+        <span class="section-label">Insight</span>
+        <h2 class="slide-title">宿泊施設は「回す」ことが難しい</h2>
+        <div class="content-area">
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <div class="card-head"><i class="fa-solid fa-circle-check" style="color: var(--accent);"></i><h3>建物は作れる</h3></div>
+                    <p>建築会社は「器」を作るプロ。世の中には素敵なデザインの建物が溢れています。</p>
+                </div>
+                <div class="insight-card warning">
+                    <div class="card-head"><i class="fa-solid fa-triangle-exclamation" style="color: #DC2626;"></i><h3>経営が続かない</h3></div>
+                    <p>宿泊業には独自の「運営オペレーション」「集客戦略」が必要。多くのオーナーがここで挫折します。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Service Flow -->
+    <div class="slide-container" id="slide7">
+        <span class="section-label">Service</span>
+        <h2 class="slide-title">最初から、最後まで。一気通貫。</h2>
+        <div class="content-area">
+            <div class="flow-container">
+                <div class="flow-item"><div class="flow-num">01</div><h4>企画</h4><p>コンセプト・収支予測</p></div>
+                <div class="flow-item"><div class="flow-num">02</div><h4>設計</h4><p>ブランド・デザイン</p></div>
+                <div class="flow-item"><div class="flow-num">03</div><h4>施工</h4><p>建築・品質管理</p></div>
+                <div class="flow-item"><div class="flow-num">04</div><h4>運営</h4><p>現場管理・スタッフ教育</p></div>
+                <div class="flow-item"><div class="flow-num">05</div><h4>集客</h4><p>SNS・OTA戦略</p></div>
+            </div>
+            <p style="margin-top: 40px; text-align: center; color: var(--text-light);">窓口を一括化することで、高いスピードと投資効率を担保します。</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Action -->
+    <div class="slide-container" id="slide8">
+        <span class="section-label">Ask for Referral</span>
+        <h2 class="slide-title">ご紹介いただきたい方</h2>
+        <div class="content-area">
+            <div class="cta-box">
+                <div>
+                    <h2>Target</h2>
+                    <ul class="referral-list">
+                        <li>遊休地の活用に悩む不動産オーナー</li>
+                        <li>空き建物・古民家をお持ちのオーナー</li>
+                        <li>新規事業で宿泊業を検討中の企業</li>
+                        <li>観光活性化を目指す地方自治体</li>
+                    </ul>
+                </div>
+                <div class="magic-phrase">
+                    <p style="font-size: 14px; margin-bottom: 10px;">紹介の魔法のフレーズ</p>
+                    <h4>「宿泊事業を<br>やりたい人がいる」</h4>
+                    <p style="margin-top: 20px; font-weight: 500;">これだけで、あとは私たちが<br>責任を持ってカタチにします。</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<!-- Navigation UI Components -->
+<div class="nav-controls">
+    <button class="nav-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="nav-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<div class="slide-indicator" id="indicator">
+    <!-- Generated by JS -->
+</div>
+
 <script>
-  Reveal.initialize({
-    width: 1280,
-    height: 720,
-    margin: 0.05, /* 画面端の余裕を少し持たせる */
-    center: false, /* 上寄せにするためfalseに設定 */
-    hash: false,
-    history: false,
-    transition: 'slide',
-    backgroundTransition: 'fade',
-    controls: true,
-    progress: true,
-    slideNumber: 'c/t'
-  });
+    const wrapper = document.getElementById('presentation-wrapper');
+    const indicator = document.getElementById('indicator');
+    const slides = document.querySelectorAll('.slide-container');
+    
+    // インジケーターの生成
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = i === 0 ? 'dot active' : 'dot';
+        dot.onclick = () => {
+            wrapper.scrollTo({ left: window.innerWidth * i, behavior: 'smooth' });
+        };
+        indicator.appendChild(dot);
+    });
+
+    // 現在のスライド位置を特定してインジケーターを更新
+    wrapper.addEventListener('scroll', () => {
+        const index = Math.round(wrapper.scrollLeft / window.innerWidth);
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    });
+
+    // ナビゲーションボタン用の関数
+    function moveSlide(direction) {
+        const currentIndex = Math.round(wrapper.scrollLeft / window.innerWidth);
+        const nextIndex = Math.max(0, Math.min(slides.length - 1, currentIndex + direction));
+        wrapper.scrollTo({ left: window.innerWidth * nextIndex, behavior: 'smooth' });
+    }
+
+    // キーボード操作への対応
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') moveSlide(1);
+        if (e.key === 'ArrowLeft') moveSlide(-1);
+    });
 </script>
 
 </body>
