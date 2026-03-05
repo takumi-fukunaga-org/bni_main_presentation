@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUGOMoRIリゾート｜プレゼンテーション</title>
+
+  <!-- Google Fonts: Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+
+  <style>
+/* ============================================================
+   Base & Variables
+============================================================ */
+:root {
+  --accent: #0F766E;      /* 深いティール（誠実・高級） */
+  --accent-soft: #F0F9F9;
+  --accent-gold: #B45309; /* アクセント用の落ち着いたゴールド */
+  --text-main: #1F2937;
+  --text-sub: #4B5563;
+  --text-light: #9CA3AF;
+  --bg-creme: #FCFAF7;    /* 少し温かみのある背景 */
+  --white: #FFFFFF;
+  --border: #E5E7EB;
+  --font-sans: 'Noto Sans JP', sans-serif;
+}
+
+/* ============================================================
+   Reveal.js Overrides
+============================================================ */
+.reveal {
+  font-family: var(--font-sans);
+  background-color: var(--bg-creme);
+  color: var(--text-main);
+}
+
+/* スライド全体を上寄せにするための調整 */
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding-top: 60px !important; /* コンテンツを上部に寄せる */
+  box-sizing: border-box;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   Layout Utilities
+============================================================ */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.flex { display: flex; }
+.grid { display: grid; }
+.gap-md { gap: 2rem; }
+.items-center { align-items: center; }
+
+.section-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 1rem; /* 余白を少し詰める */
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 4px;
+}
+
+.highlight { color: var(--accent); }
+
+/* ============================================================
+   Slide 1: Hero
+============================================================ */
+.hero-content {
+  border-left: 8px solid var(--accent);
+  padding-left: 3rem;
+  position: relative;
+  margin-top: 40px; /* ヒーローのみ位置調整 */
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -8px;
+  width: 120px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.reveal .hero-title-top {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.3em;
+  margin-bottom: 0.5rem;
+}
+
+.reveal .hero-title-main {
+  font-size: 4.2rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.reveal .hero-tagline {
+  font-size: 1.2rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+.presenter-info {
+  margin-top: 3.5rem;
+  display: flex;
+  align-items: baseline; /* テキストの底辺で揃える */
+  gap: 2.5rem;
+}
+
+.company-logo-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-main);
+}
+
+.presenter-name-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.2rem;
+}
+
+.presenter-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.presenter-role {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Slide 2: Two Column (Origin)
+============================================================ */
+/* Originスライドはフルスクリーンのため、個別にpaddingを解除 */
+.reveal .slides section.slide-origin {
+  padding-top: 0 !important;
+}
+
+.origin-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  height: 100vh;
+}
+
+.image-pane {
+  position: relative;
+  overflow: hidden;
+  background: #E5E7EB;
+}
+
+.image-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-pane {
+  padding: 8% 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .pane-title {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.origin-list {
+  list-style: none;
+  padding: 0;
+}
+
+.origin-list li {
+  margin-bottom: 1.5rem;
+}
+
+.list-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list-body {
+  font-size: 1rem;
+  color: var(--text-sub);
+}
+
+/* ============================================================
+   Slide 3: Insight (The Problem)
+============================================================ */
+.insight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+.insight-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.card-icon.ok { background: var(--accent-soft); color: var(--accent); }
+.card-icon.ng { background: #FEF2F2; color: #DC2626; }
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Slide 4: One Stop Flow
+============================================================ */
+.flow-timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 2.5rem;
+}
+
+.flow-timeline::before {
+  content: '';
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 1;
+}
+
+.flow-step {
+  position: relative;
+  z-index: 2;
+  width: 18%;
+  text-align: center;
+}
+
+.step-number {
+  width: 70px;
+  height: 70px;
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.flow-step.active .step-number {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(15, 118, 110, 0.2);
+}
+
+.step-label {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.step-info {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Slide 5: Portfolio Grid
+============================================================ */
+.portfolio-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.portfolio-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 220px; /* 250pxから220pxに縮小し、確実に収まるように */
+  background: #E5E7EB;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: var(--white);
+}
+
+.item-name { font-weight: 700; font-size: 0.95rem; }
+.item-loc { font-size: 0.7rem; opacity: 0.8; }
+
+/* ============================================================
+   Slide 6: Referral CTA
+============================================================ */
+.cta-box {
+  background: var(--accent);
+  color: var(--white);
+  padding: 3rem;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+.cta-left h2 {
+  color: var(--white) !important;
+  font-size: 2.6rem !important;
+  margin-bottom: 1rem;
+}
+
+.cta-phrase {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-soft);
+  border: 2px dashed rgba(255,255,255,0.3);
+  padding: 1.2rem;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.referral-list-clean {
+  list-style: none;
+  padding: 0;
+}
+
+.referral-list-clean li {
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 0.6rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- Slide 1: Hero -->
+    <section data-transition="fade-in slide-out">
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-title-top">BNI MAIN PRESENTATION</p>
+          <h1 class="hero-title-main">SUGOMoRI<br><span class="highlight">から一歩前へ。</span></h1>
+          <p class="hero-tagline">
+            宿泊事業の企画・設計・工事から運営・集客まで。<br>
+            私たちは、想いを「持続可能な収益」に変える専門集団です。
+          </p>
+          <div class="presenter-info">
+            <div class="company-logo-text">株式会社ハウスインフォ</div>
+            <div class="presenter-name-wrap">
+              <span class="presenter-name">福永 拓光</span>
+              <span class="presenter-role">宿泊事業コンサルティング</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2: Origin (Magazine Style) -->
+    <section class="slide-origin" data-transition="slide" style="padding: 0;">
+      <div class="origin-layout">
+        <div class="image-pane">
+          <img src="images/sugomori.jpg" alt="SUGOMoRIリゾート生野高原">
+        </div>
+        <div class="content-pane">
+          <span class="section-label">OUR ORIGIN</span>
+          <h2 class="pane-title">自らが運営者<br>という強み。</h2>
+          <ul class="origin-list">
+            <li>
+              <div class="list-title">SUGOMoRIリゾート生野高原</div>
+              <div class="list-body">兵庫県朝来市。2021年、私たちがゼロから手掛けた原点です。</div>
+            </li>
+            <li>
+              <div class="list-title">21棟の多様なスタイル</div>
+              <div class="list-body">ドームテントから貸別荘まで、高付加価値な体験をデザイン。</div>
+            </li>
+            <li>
+              <div class="list-title">現場で磨いたノウハウ</div>
+              <div class="list-body">理論だけではない、運営現場でしか得られない「本物の知恵」を提供します。</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Insight (Comparison) -->
+    <section>
+      <div class="container">
+        <span class="section-label">INSIGHT</span>
+        <h2 style="font-size: 2.8rem; margin-bottom: 1.5rem;">宿泊施設は、<br><span class="highlight">「建てる」ことより「回す」</span>ことが難しい。</h2>
+        
+        <div class="insight-grid">
+          <div class="insight-card" style="border-top: 4px solid #00e626;">
+            <div class="card-icon ok">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>
+            </div>
+            <h3 class="card-title">建物は作れる</h3>
+            <p class="card-desc">
+              建築会社は「器」を作るプロです。<br>
+              世の中に素敵なデザインの建物は溢れています。
+            </p>
+          </div>
+          
+          <div class="insight-card" style="border-top: 4px solid #DC2626;">
+            <div class="card-icon ng">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </div>
+            <h3 class="card-title">
+              しかし、<br>
+              経営が続かない</h3>
+            <p class="card-desc">
+              宿泊業には独自の「運営オペレーション」「スタッフ教育」<br>
+              「集客戦略」が必要。<br>
+              多くのオーナー様がここで挫折します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: One-Stop (Flow) -->
+    <section>
+      <div class="container">
+        <span class="section-label">OUR SERVICE</span>
+        <h2 style="font-size: 2.8rem; margin-bottom: 0.5rem;">最初から、最後まで。<br><span class="highlight">一気通貫。</span></h2>
+        
+        <div class="flow-timeline">
+          <div class="flow-step active">
+            <div class="step-number">01</div>
+            <div class="step-label">企画</div>
+            <div class="step-info">収支予測・コンセプト</div>
+          </div>
+          <div class="flow-step active">
+            <div class="step-number">02</div>
+            <div class="step-label">設計</div>
+            <div class="step-info">ブランド・デザイン</div>
+          </div>
+          <div class="flow-step active">
+            <div class="step-number">03</div>
+            <div class="step-label">施工</div>
+            <div class="step-info">建築工事・品質管理</div>
+          </div>
+          <div class="flow-step active">
+            <div class="step-number">04</div>
+            <div class="step-label">運営</div>
+            <div class="step-info">現場管理・教育</div>
+          </div>
+          <div class="flow-step active">
+            <div class="step-number">05</div>
+            <div class="step-label">集客</div>
+            <div class="step-info">OTA・SNS戦略</div>
+          </div>
+        </div>
+        
+        <p style="margin-top: 2.5rem; font-size: 1rem; color: var(--text-sub); text-align: center;">
+          各工程の専門会社をバラバラに探す必要はありません。<br>
+          窓口を一括化することで、スピードと品質、そこで高い投資効率を担保します。
+        </p>
+      </div>
+    </section>
+
+    <!-- Slide 5: Portfolio Grid -->
+    <section>
+      <div class="container">
+        <span class="section-label">PORTFOLIO</span>
+        <h2 style="margin-bottom: 1.2rem;">全国に広がるプロジェクト。</h2>
+        
+        <div class="portfolio-container">
+          <!-- Item 1 -->
+          <div class="portfolio-item">
+            <img src="images/sugomori.jpg" alt="SUGOMoRIリゾート生野高原">
+            <div class="portfolio-overlay">
+              <div class="item-name">SUGOMoRIリゾート生野高原</div>
+              <div class="item-loc">兵庫県朝来市</div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="portfolio-item">
+            <img src="images/kona.jpg" alt="KONA RESORT AWAJI KAI">
+            <div class="portfolio-overlay">
+              <div class="item-name">KONA RESORT AWAJI KAI</div>
+              <div class="item-loc">兵庫県淡路島</div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="portfolio-item">
+            <img src="images/besso.jpg" alt="Besso姫路">
+            <div class="portfolio-overlay">
+              <div class="item-name">Besso姫路</div>
+              <div class="item-loc">兵庫県姫路市</div>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="portfolio-item">
+            <img src="images/utakata.jpg" alt="UTAKATA HOTEL HIMEJI">
+            <div class="portfolio-overlay">
+              <div class="item-name">UTAKATA HOTEL HIMEJI</div>
+              <div class="item-loc">兵庫県姫路市</div>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="portfolio-item">
+            <img src="images/wabisabi.jpg" alt="侘寂">
+            <div class="portfolio-overlay">
+              <div class="item-name">侘寂</div>
+              <div class="item-loc">兵庫県</div>
+            </div>
+          </div>
+          <!-- Item 6 -->
+          <div class="portfolio-item">
+            <img src="images/yohaku.jpg" alt="余泊">
+            <div class="portfolio-overlay">
+              <div class="item-name">余泊</div>
+              <div class="item-loc">長崎県</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Referral (Action) -->
+    <section>
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-left">
+            <span class="section-label" style="color: var(--white); border-color: var(--white);">ASK FOR REFERRAL</span>
+            <h2>ご紹介いただきたい方</h2>
+            <ul class="referral-list-clean">
+              <li>空き建物・古民家をお持ちのオーナー</li>
+              <li>遊休地の活用に悩む不動産オーナー</li>
+              <li>新規事業で宿泊業を検討中の企業</li>
+              <li>観光活性化を目指す地方自治体</li>
+            </ul>
+          </div>
+          <div class="cta-right">
+            <p style="text-align: center; margin-bottom: 1rem; font-size: 0.9rem; opacity: 0.8;">紹介の魔法のフレーズ</p>
+            <div class="cta-phrase">
+              「宿泊事業を<br>やりたい人がいる」
+            </div>
+            <p style="margin-top: 1.5rem; text-align: center; font-size: 1.1rem; font-weight: 500;">
+              これだけで、あとは私たちが<br>
+              責任を持ってカタチにします。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280,
+    height: 720,
+    margin: 0.05, /* 画面端の余裕を少し持たせる */
+    center: false, /* 上寄せにするためfalseに設定 */
+    hash: false,
+    history: false,
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    slideNumber: 'c/t'
+  });
+</script>
+
+</body>
+</html>
