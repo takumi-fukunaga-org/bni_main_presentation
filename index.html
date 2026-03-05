@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* ============================================================
-            Core Design System
+            コア・デザインシステム
         ============================================================ */
         :root {
             --accent: #0F766E;      /* 高級感のあるティール */
@@ -33,7 +33,7 @@
             overflow: hidden;
         }
 
-        /* 横スクロールラッパー */
+        /* 横スクロール設定（スナップ機能付き） */
         .presentation-wrapper {
             display: flex;
             overflow-x: auto;
@@ -48,7 +48,7 @@
             display: none;
         }
 
-        /* 各スライドの基本スタイル */
+        /* スライド共通コンテナ */
         .slide-container {
             background-color: var(--bg-creme);
             flex: 0 0 100vw;
@@ -56,16 +56,16 @@
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
-            padding: 60px;
+            padding: 50px 60px; /* 上下余白を少し調整 */
             position: relative;
             overflow: hidden;
         }
 
         .slide-container > * { position: relative; z-index: 1; }
 
-        /* Typography */
+        /* タイポグラフィ */
         h1 { font-size: clamp(48px, 8vw, 80px); font-weight: 900; line-height: 1.1; color: var(--text-main); }
-        h2.slide-title { border-left: 8px solid var(--accent); font-size: 42px; font-weight: 900; margin-bottom: 40px; padding-left: 24px; text-align: left; width: 100%; }
+        h2.slide-title { border-left: 8px solid var(--accent); font-size: 38px; font-weight: 900; margin-bottom: 30px; padding-left: 24px; text-align: left; width: 100%; }
         h3 { font-size: 24px; font-weight: 700; color: var(--text-main); }
         p, li { color: var(--text-sub); font-size: 18px; line-height: 1.6; }
         .highlight { color: var(--accent); }
@@ -74,7 +74,7 @@
             border-bottom: 2px solid var(--accent);
             color: var(--accent);
             display: inline-block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 0.2em;
             margin-bottom: 12px;
@@ -82,7 +82,7 @@
             text-transform: uppercase;
         }
 
-        /* --- Slide 1: Title Slide --- */
+        /* --- スライド 1: 表紙（スプリットデザイン） --- */
         #slide1 { padding: 0; }
         .hero-split { display: flex; height: 100%; width: 100%; }
         .hero-text-side { 
@@ -121,14 +121,15 @@
             margin-right: -100px;
         }
         .hero-text-side .subtitle {
-            font-size: 20px;
+            font-size: 19px;
             color: var(--text-sub);
             max-width: 650px;
             border-left: 2px solid var(--accent);
             padding-left: 20px;
+            line-height: 1.5;
         }
 
-        /* --- Navigation UI --- */
+        /* --- ナビゲーションUI --- */
         .nav-controls {
             position: fixed;
             bottom: 30px;
@@ -178,11 +179,10 @@
             border-radius: 10px;
         }
 
-        /* --- Slide: Self Introduction --- */
+        /* --- スライド 2: 自己紹介 --- */
         .profile-grid { align-items: start; display: grid; gap: 60px; grid-template-columns: 350px 1fr; }
         .profile-img-wrap { border: 4px solid var(--white); border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); height: 450px; width: 350px; overflow: hidden; }
         .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        
         .profile-details .kana { color: var(--text-light); display: block; font-size: 18px; margin-bottom: 10px; }
         .profile-details h3 { font-size: 38px; margin-bottom: 20px; }
         .info-list { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; list-style: none; margin-bottom: 30px; }
@@ -193,9 +193,9 @@
         .hobby-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
         .hobby-tag { background: var(--accent-soft); border-radius: 50px; color: var(--accent); font-size: 15px; font-weight: 700; padding: 6px 16px; }
 
-        /* --- Slide: Career Timeline --- */
-        .timeline-container { height: 100%; padding: 40px 0; position: relative; }
-        .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 245px; width: 100%; z-index: 0; }
+        /* --- スライド 3: 経歴タイムライン --- */
+        .timeline-container { height: 100%; padding: 20px 0; position: relative; }
+        .timeline-line { background: var(--border); height: 4px; left: 0; position: absolute; top: 230px; width: 100%; z-index: 0; }
         .timeline-line::after { border-right: 4px solid var(--border); border-top: 4px solid var(--border); content: ''; height: 20px; position: absolute; right: 0; top: -8px; transform: rotate(45deg); width: 20px; }
         .timeline-items { display: flex; height: 100%; justify-content: space-between; position: relative; z-index: 1; }
         .timeline-item { align-items: center; display: flex; flex-direction: column; text-align: center; width: 24%; }
@@ -204,7 +204,7 @@
             border-radius: 12px; 
             box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
             width: 100%; 
-            max-width: 180px;
+            max-width: 160px; 
             aspect-ratio: 1 / 1;
             margin-bottom: 25px; 
             overflow: hidden; 
@@ -214,27 +214,33 @@
         .timeline-item.active .timeline-dot { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
         .timeline-date { color: var(--accent); font-size: 14px; font-weight: 900; margin-bottom: 8px; }
         .timeline-label { font-size: 16px; font-weight: 900; line-height: 1.4; color: var(--text-main); margin-bottom: 12px; }
-        .timeline-desc { font-size: 14px; color: var(--text-sub); line-height: 1.5; padding: 0 10px; text-align: left; }
+        .timeline-desc { font-size: 13px; color: var(--text-sub); line-height: 1.5; padding: 0 10px; text-align: left; }
 
-        /* --- Slide: SUGOMoRI Appeal (New) --- */
+        /* --- スライド 4: SUGOMoRIの魅力（画像縦拡大版） --- */
         .appeal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; }
-        .appeal-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .appeal-img-box { width: 100%; height: 200px; background: #eee; position: relative; }
+        .appeal-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+        .appeal-img-box { 
+            width: 100%; 
+            height: 380px; /* 320pxからさらに380pxに拡大し、縦長に調整 */
+            background: #f3f4f6; 
+            position: relative; 
+            border-bottom: 1px solid var(--border);
+        }
         .appeal-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .appeal-content { padding: 30px; }
-        .appeal-icon { color: var(--accent); font-size: 32px; margin-bottom: 15px; }
-        .appeal-card h3 { font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid var(--accent-soft); padding-bottom: 10px; }
-        .appeal-card p { font-size: 15px; line-height: 1.5; color: var(--text-sub); }
+        .appeal-content { padding: 25px 30px 30px; }
+        .appeal-icon { color: var(--accent); font-size: 28px; margin-bottom: 12px; }
+        .appeal-card h3 { font-size: 21px; margin-bottom: 12px; border-bottom: 2px solid var(--accent-soft); padding-bottom: 10px; }
+        .appeal-card p { font-size: 14px; line-height: 1.6; color: var(--text-sub); }
 
-        /* --- Slide: Portfolio --- */
+        /* --- スライド 5: ポートフォリオ --- */
         .portfolio-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); width: 100%; }
-        .portfolio-item { border-radius: 12px; height: clamp(150px, 30vh, 230px); position: relative; overflow: hidden; }
+        .portfolio-item { border-radius: 12px; height: clamp(150px, 28vh, 230px); position: relative; overflow: hidden; }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; }
         .portfolio-overlay { background: linear-gradient(transparent, rgba(0,0,0,0.8)); bottom: 0; color: var(--white); left: 0; padding: 15px; position: absolute; right: 0; z-index: 2;}
         .portfolio-overlay span { display: block; font-size: 14px; font-weight: 700; }
         .portfolio-overlay small { font-size: 11px; opacity: 0.8; }
 
-        /* --- Slide: Origin --- */
+        /* --- スライド 6: 運営現場の強み --- */
         .bleed-image-layout { display: grid; gap: 50px; grid-template-columns: 1fr 1fr; padding: 0; align-items: stretch; }
         .bleed-content { display: flex; flex-direction: column; justify-content: center; padding: 60px; }
         .bleed-img-side { height: 100%; overflow: hidden; }
@@ -243,21 +249,21 @@
         .origin-list li { border-left: 4px solid var(--accent); margin-bottom: 24px; padding-left: 20px; }
         .origin-list h4 { color: var(--accent); font-size: 20px; margin-bottom: 5px; }
 
-        /* --- Slide: Insight --- */
+        /* --- スライド 7: インサイト --- */
         .insight-grid { display: grid; gap: 30px; grid-template-columns: 1fr 1fr; width: 100%; }
         .insight-card { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-top: 6px solid var(--accent); }
         .insight-card.warning { border-top-color: #DC2626; }
         .card-head { align-items: center; display: flex; gap: 15px; margin-bottom: 20px; }
         .card-head i { font-size: 32px; }
 
-        /* --- Slide: Service Flow --- */
+        /* --- スライド 8: サービスフロー --- */
         .flow-container { display: flex; gap: 20px; justify-content: space-between; width: 100%; }
         .flow-item { align-items: center; background: var(--white); border-radius: 15px; display: flex; flex-direction: column; flex: 1; padding: 30px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .flow-num { background: var(--accent); border-radius: 50%; color: var(--white); font-size: 18px; font-weight: 900; height: 40px; margin-bottom: 15px; padding-top: 6px; width: 40px; }
         .flow-item h4 { font-size: 20px; margin-bottom: 10px; }
         .flow-item p { font-size: 14px; color: var(--text-light); }
 
-        /* --- Slide: Action --- */
+        /* --- スライド 9: アクション --- */
         .cta-box { align-items: center; background: var(--accent); border-radius: 24px; color: var(--white); display: grid; gap: 50px; grid-template-columns: 1fr 1.2fr; margin-top: 20px; padding: 50px; }
         .cta-box h2 { color: var(--white); border: none; font-size: 36px; margin-bottom: 20px; padding: 0; }
         .referral-list { list-style: none; }
@@ -271,7 +277,7 @@
 <body>
 
 <div class="presentation-wrapper" id="presentation-wrapper">
-    <!-- Slide 1: Title -->
+    <!-- スライド 1: 表紙 -->
     <div class="slide-container" id="slide1">
         <div class="hero-split">
             <div class="hero-text-side">
@@ -285,7 +291,7 @@
         </div>
     </div>
 
-    <!-- Slide 2: Self Introduction -->
+    <!-- スライド 2: 自己紹介 -->
     <div class="slide-container" id="slide2">
         <span class="section-label">Profile</span>
         <h2 class="slide-title">自己紹介</h2>
@@ -318,7 +324,7 @@
         </div>
     </div>
 
-    <!-- Slide 3: Career Timeline -->
+    <!-- スライド 3: 経歴 -->
     <div class="slide-container" id="slide3">
         <span class="section-label">Journey</span>
         <h2 class="slide-title">経歴</h2>
@@ -338,37 +344,37 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2014.4 - 2016.3</div>
                         <p class="timeline-label">辻製菓専門学校</p>
-                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。<br>ひたすらお菓子を作り続けた</p>
+                        <p class="timeline-desc">憧れのパティシエになるために専門学校に進学。ひたすらお菓子を作り続けた</p>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-img"><img src="images/job3.jpg" alt="学校法人 辻料理学館"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2016.4 - 2022.3</div>
                         <p class="timeline-label">学校法人 辻料理学館</p>
-                        <p class="timeline-desc">卒業後、専門学校の教員として就職。<br>授業と研究をしながらお菓子作りのスキルアップ</p>
+                        <p class="timeline-desc">卒業後、専門学校の教員として就職。授業と研究をしながらお菓子作りのスキルアップ</p>
                     </div>
                     <div class="timeline-item active">
                         <div class="timeline-img"><img src="images/job4.jpg" alt="株式会社ハウスインフォ"></div>
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2022.4 - 現在</div>
                         <p class="timeline-label">株式会社ハウスインフォ</p>
-                        <p class="timeline-desc">レストランのシェフ退職を機に、後任として就職。<br>スゴモリに入り浸る日々がスタート</p>
+                        <p class="timeline-desc">レストランのシェフ退職を機に、後任として就職。スゴモリに入り浸る日々がスタート</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: SUGOMoRI Appeal (New Slide) -->
+    <!-- スライド 4: SUGOMoRIの魅力 -->
     <div class="slide-container" id="slide4">
         <span class="section-label">Resort Concept</span>
         <h2 class="slide-title">SUGOMoRIリゾート生野高原の魅力</h2>
         <div class="content-area">
             <div class="appeal-grid">
-                <!-- Point 1 -->
+                <!-- 絶景 -->
                 <div class="appeal-card">
                     <div class="appeal-img-box">
-                        <img src="images/sugomori1.jpg" alt="絶景">
+                        <img src="images/sugomori1.jpg" alt="標高650mの絶景">
                     </div>
                     <div class="appeal-content">
                         <div class="appeal-icon"><i class="fa-solid fa-mountain-sun"></i></div>
@@ -376,10 +382,10 @@
                         <p>都会の喧騒を忘れさせる高原の澄んだ空気。夜には降り注ぐような星空、朝には幻想的な雲海が広がる最高のロケーションです。</p>
                     </div>
                 </div>
-                <!-- Point 2 -->
+                <!-- 建築 -->
                 <div class="appeal-card">
                     <div class="appeal-img-box">
-                        <img src="images/sugomori2.jpg" alt="建築">
+                        <img src="images/sugomori2.jpg" alt="唯一無二のデザイン">
                     </div>
                     <div class="appeal-content">
                         <div class="appeal-icon"><i class="fa-solid fa-building-columns"></i></div>
@@ -387,10 +393,10 @@
                         <p>ドームテントからラグジュアリーな貸別荘まで。21棟すべてが異なるコンセプトを持ち、何度訪れても新しい発見がある建築美が自慢です。</p>
                     </div>
                 </div>
-                <!-- Point 3 -->
+                <!-- 体験 -->
                 <div class="appeal-card">
                     <div class="appeal-img-box">
-                        <img src="images/sugomori3.jpg" alt="体験">
+                        <img src="images/sugomori3.jpg" alt="五感を研ぎ澄ます体験">
                     </div>
                     <div class="appeal-content">
                         <div class="appeal-icon"><i class="fa-solid fa-fire"></i></div>
@@ -402,7 +408,7 @@
         </div>
     </div>
 
-    <!-- Slide 5: Portfolio -->
+    <!-- スライド 5: ポートフォリオ -->
     <div class="slide-container" id="slide5">
         <span class="section-label">Portfolio</span>
         <h2 class="slide-title">全国に広がるプロジェクト</h2>
@@ -418,7 +424,7 @@
         </div>
     </div>
 
-    <!-- Slide 6: Origin -->
+    <!-- スライド 6: 運営現場の強み -->
     <div class="slide-container bleed-image-layout" id="slide6">
         <div class="bleed-content">
             <span class="section-label">Strength</span>
@@ -434,7 +440,7 @@
         </div>
     </div>
 
-    <!-- Slide 7: Insight -->
+    <!-- スライド 7: インサイト -->
     <div class="slide-container" id="slide7">
         <span class="section-label">Insight</span>
         <h2 class="slide-title">宿泊施設は「回す」ことが難しい</h2>
@@ -452,10 +458,10 @@
         </div>
     </div>
 
-    <!-- Slide 8: Service Flow -->
+    <!-- スライド 8: サービスフロー -->
     <div class="slide-container" id="slide8">
         <span class="section-label">Service</span>
-        <h2 class="slide-title">最初から、最後に。一気通貫。</h2>
+        <h2 class="slide-title">最初から、最後まで。一気通貫。</h2>
         <div class="content-area">
             <div class="flow-container">
                 <div class="flow-item"><div class="flow-num">01</div><h4>企画</h4><p>コンセプト・収支予測</p></div>
@@ -468,7 +474,7 @@
         </div>
     </div>
 
-    <!-- Slide 9: Action -->
+    <!-- スライド 9: アクション -->
     <div class="slide-container" id="slide9">
         <span class="section-label">Ask for Referral</span>
         <h2 class="slide-title">ご紹介いただきたい方</h2>
@@ -493,6 +499,7 @@
     </div>
 </div>
 
+<!-- 操作系UI -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="nav-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
@@ -515,7 +522,7 @@
         indicator.appendChild(dot);
     });
 
-    // スクロールイベントでインジケーターを更新
+    // スクロール時のインジケーター更新
     wrapper.addEventListener('scroll', () => {
         const index = Math.round(wrapper.scrollLeft / window.innerWidth);
         const dots = document.querySelectorAll('.dot');
@@ -524,7 +531,7 @@
         });
     });
 
-    // ナビゲーションボタン
+    // スライド移動関数
     function moveSlide(direction) {
         const currentIndex = Math.round(wrapper.scrollLeft / window.innerWidth);
         const nextIndex = Math.max(0, Math.min(slides.length - 1, currentIndex + direction));
